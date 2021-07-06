@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static  %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/mystyle.css" %}"/>
+    <title>Flight Hour Record</title>
+</head>
+<body>
+    <h1> Here are your flight records </h1>
+    <div class="djangotwo">
+    {% if flight_hour  %}
+        <table>
+            <thead>
+                <th>Aircraft Reg ID</th>
+                <th>Take Off Time</th>
+                <th>Landing time</th>
+                <th>Flight Hours</th>
+            </thead>
+            {% for flight in flight_hour  %}
+                <tr>
+                    <td>{{ flight.flight_icao }}</td>
+                    <td>{{ flight.takeoff_time }}</td>
+                    <td>{{ flight.landing_time }}</td>
+                    <td>{{ flight.flight_hours }}</td>
+                </tr>
+            {% endfor  %}
+        </table>
+    {% else  %}
+        <p>No Flight Record!!!</p>
+    {% endif %}
+    </div>
+</body>
+</html>

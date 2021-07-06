@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
+
+    <title>Flight Record Display</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Welcome, input your Airline ICAO code to view your records!</h1>
+          <br>
+          {{to_view | safe}}
+          <!-- <br> -->
+          <form action="" method="POST" autocomplete="off">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary btn-lg">View</button>
+          </form>
+      </div>
+      <br>
+      <div>
+        {% if flight_info %}
+          <table style="text-align: center;">
+            <tr style="border: 2px solid blue;">
+              <th>Airline ICAO</th>
+              <th>Aircraft Reg.</th>
+              <th>Origin Airport</th>
+              <th>Destination Airport</th>
+              <th>Longitude</th>
+              <th>Latitude</th>
+              <th>Time</th>
+            </tr>
+            {% for details in flight_info %}
+            <tr style="border: 2px dashed blue;">
+              <td>{{ details.airline_icao }}</td>
+              <td>{{ details.aircraft_reg }}</td>
+              <td>{{ details.origin_airport }}</td>
+              <td>{{ details.destination_airport }}</td>
+              <td>{{ details.long }}</td>
+              <td>{{ details.lat }}</td>
+              <td>{{ details.created }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        {% else%}
+          <h3>{{ error }} </h3>
+        {% endif %}
+      </div>
+          <br>
+          This product includes GeoLite2 data created by MaxMind, available from
+          <a href="https://www.maxmind.com">https://www.maxmind.com</a>.
+    </div>
+
+
+
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
