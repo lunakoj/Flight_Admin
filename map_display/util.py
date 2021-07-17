@@ -11,7 +11,7 @@ def check_flights(airline_icao):
 
     if fr_api != "No Response!":
         # airline_icao = "UAE"
-        flights = fr_api.get_flights(airline = airline_icao)
+        flights = fr_api.get_flights(airline = airline_icao.upper())
         # now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
     else:

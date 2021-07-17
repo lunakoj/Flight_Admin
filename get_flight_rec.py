@@ -24,7 +24,7 @@ class ProgramKilled(Exception):
     pass
 
 def check_flights():
-    airline_icao = "UAE"
+    airline_icao = "DAN"
     flights = fr_api.get_flights(airline = airline_icao)
     now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     f_record = {}
@@ -39,6 +39,7 @@ def check_flights():
                 print("{}'s Flight {} took of at: {} and landed at: {}. flight hours: {}".format(flights[data].airline_icao, flights[data].registration, f_record[flights[data].registration][0], f_record[flights[data].registration][1], f_record[flights[data].registration][1] - f_record[flights[data].registration][0]))
                 # New Flight Data Entry
                 flight_data = Pilot_flight_hours.objects.get_or_create(flight_icao = flights[data].registration, takeoff_time = f_record[flights[data].registration][0], landing_time = f_record[flights[data].registration][1], flight_hours = f_record[flights[data].registration][1] - f_record[flights[data].registration][0])[0]
+                # Pilot_flight_hours.objects.get_or_create(flight_icao = flights[data].registration, takeoff_time = f_record[flights[data].registration][0], landing_time = f_record[flights[data].registration][1], flight_hours = f_record[flights[data].registration][1] - f_record[flights[data].registration][0])[0]
 
                 del f_record[flights[data].registration]
 
